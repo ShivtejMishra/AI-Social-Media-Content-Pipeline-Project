@@ -30,15 +30,14 @@ export default defineConfig({
     // Split vendor chunks for better caching
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Core React — rarely changes, cached aggressively
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // Data layer
-          'query-vendor': ['@tanstack/react-query'],
-          // UI utilities
-          'ui-vendor': ['lucide-react', 'sonner', 'date-fns'],
-          // Calendar is heavy — isolate it
-          'calendar-vendor': ['react-big-calendar'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-dom') || id.includes('react-router-dom')) return 'react-vendor';
+            if (id.includes('react')) return 'react-vendor';
+            if (id.includes('@tanstack')) return 'query-vendor';
+            if (id.includes('lucide-react') || id.includes('sonner') || id.includes('date-fns')) return 'ui-vendor';
+            if (id.includes('react-big-calendar')) return 'calendar-vendor';
+          }
         },
       },
     },
