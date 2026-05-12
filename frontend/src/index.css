@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ─── Mobile: safe area for bottom nav on iOS ────────────────────────────── */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ─── Smooth scrolling ───────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ─── Prevent layout shift from scrollbar ───────────────────────────────── */
+body {
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+/* ─── Enable class-based dark mode (Tailwind v4) ────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+
+  /* Brand Colors */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+
+  /* Surface colors for dark mode */
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-800: #1e293b;
+  --color-surface-850: #172033;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #070d1c;
+}
+
+/* ─── Root Variables ───────────────────────────────────────────────── */
+:root {
+  --sidebar-width: 260px;
+  color-scheme: light dark;
+}
+
+/* ─── Base Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Scrollbar Styling ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+.dark ::-webkit-scrollbar-thumb { background: #334155; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ─── Animation Utilities ─────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-brand {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+.animate-slideIn { animation: slideIn 0.2s ease-out; }
+
+.shimmer {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 936px 100%;
+  animation: shimmer 1.5s infinite;
+}
+.dark .shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #2d3b52 50%, #1e293b 75%);
+  background-size: 936px 100%;
+}
+
+/* ─── Glass Effect ────────────────────────────────────────────────── */
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-dark {
+  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Gradient Text ───────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Custom Ring Focus ───────────────────────────────────────────── */
+.focus-ring {
+  outline: none;
+  ring-width: 2px;
+  ring-color: #6366f1;
+  ring-offset-width: 2px;
+}
+
+/* ─── Prose for generated content ─────────────────────────────────── */
+.content-preview {
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.content-preview p { margin-bottom: 1em; }
+.content-preview strong { font-weight: 600; }
+
+/* ─── Light Mode Global Fixes ──────────────────────────────────────── */
+/* Ensure body has correct background and text in both modes */
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark body, .dark {
+  background-color: #070d1c;
+  color: #f1f5f9;
+}
+
+/* Fix: sidebar + layouts that hardcode dark backgrounds */
+:root:not(.dark) .sidebar-nav-item:hover {
+  background-color: #f1f5f9;
+}
+
+/* Fix: any element with only dark: text color but no light text — default to slate-800 */
+:root:not(.dark) [class*="dark:text-white"]:not([class*="text-"]) {
+  color: #1e293b;
+}
+
+/* ─── Auth Pages Light Mode ─────────────────────────────────────────── */
+/* Left branding panel on Login/Signup — already dark bg, text should be white */
+.auth-panel-left {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+}
+
+.auth-panel-left * {
+  --tw-text-opacity: 1;
+}
+
+/* ─── Button hover states in light mode ─────────────────────────────── */
+:root:not(.dark) button:hover {
+  /* Let Tailwind handle, just ensure no dark residuals */
+}
+
+/* ─── Dashboard stat cards light fix ────────────────────────────────── */
+:root:not(.dark) .bg-slate-800\/50 {
+  background-color: #f1f5f9 !important;
+}
+
+:root:not(.dark) .bg-slate-800\/40 {
+  background-color: #f1f5f9 !important;
+}
+
+:root:not(.dark) .bg-slate-800\/30 {
+  background-color: #f8fafc !important;
+}
+
+:root:not(.dark) .bg-slate-800\/60 {
+  background-color: #ffffff !important;
+}
+
+:root:not(.dark) .bg-slate-900\/50 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+/* ─── Border fixes in light mode ────────────────────────────────────── */
+:root:not(.dark) .border-slate-800 {
+  border-color: #e2e8f0 !important;
+}
+
+:root:not(.dark) .border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+
+/* ─── Text fixes — slate-400/500 are too faint on white ─────────────── */
+/* These are intentionally left for secondary/muted text — OK as-is */
+
+/* Hover background fixes for buttons in light mode */
+:root:not(.dark) .hover\:bg-slate-800:hover {
+  background-color: #f1f5f9 !important;
+}
+
+:root:not(.dark) .hover\:bg-slate-800\/70:hover {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+:root:not(.dark) .dark\:hover\:bg-slate-800\/70:hover,
+:root:not(.dark) .dark\:hover\:bg-slate-700:hover {
+  /* These are dark-prefixed so they don't apply in light mode anyway */
+}
+
+/* Fix: inputs that still appear dark in light mode */
+:root:not(.dark) input,
+:root:not(.dark) textarea,
+:root:not(.dark) select {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-color: #e2e8f0;
+}
+
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* Fix: select dropdowns always show text regardless of bg-transparent usage */
+select {
+  color: #0f172a;
+  background-color: #ffffff;
+}
+
+.dark select {
+  color: #f1f5f9;
+  background-color: #0f172a;
+}
+
+select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.dark select option {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+
+/* Fix: workspace stat cards that use bg-slate-800/50 without dark: prefix */
+:root:not(.dark) .rounded-xl.p-3.text-center {
+  background-color: #f1f5f9;
+}
+

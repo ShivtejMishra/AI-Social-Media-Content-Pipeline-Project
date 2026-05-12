@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SocialX Studio — AI-Powered Social Media Content Pipeline. Generate Instagram captions, LinkedIn posts, Twitter threads, campaign ideas, and stunning visuals using Google Gemini AI." />
+    <meta name="keywords" content="AI social media, content generation, Instagram captions, LinkedIn posts, Twitter threads, Google Gemini, social media automation" />
+    <meta property="og:title" content="SocialX Studio — AI Social Media Content Pipeline" />
+    <meta property="og:description" content="Generate platform-perfect social media content and visuals with AI" />
+    <meta name="theme-color" content="#6366f1" />
+    <title>SocialX Studio — AI Social Media Content Pipeline</title>
+  </head>
+  <body>
+    <!-- Apply theme instantly from localStorage to prevent flash -->
+    <script>
+      (function() {
+        try {
+          var ui = JSON.parse(localStorage.getItem('socialx-ui') || '{}');
+          var theme = ui.state?.theme || 'dark';
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch(e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
