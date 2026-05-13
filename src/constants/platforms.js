@@ -1,10 +1,13 @@
+import PlatformIcon from './PlatformIcon.jsx';
+export { PlatformIcon };
+
 export const PLATFORMS = [
-  { value: 'instagram', label: 'Instagram', icon: '📸', color: '#E1306C' },
-  { value: 'linkedin', label: 'LinkedIn', icon: '💼', color: '#0A66C2' },
-  { value: 'twitter', label: 'Twitter / X', icon: '🐦', color: '#1DA1F2' },
-  { value: 'facebook', label: 'Facebook', icon: '👥', color: '#1877F2' },
-  { value: 'youtube_shorts', label: 'YouTube Shorts', icon: '▶️', color: '#FF0000' },
-  { value: 'general', label: 'General Marketing', icon: '📢', color: '#6366f1' },
+  { value: 'instagram', label: 'Instagram', color: '#E1306C' },
+  { value: 'linkedin', label: 'LinkedIn', color: '#0A66C2' },
+  { value: 'twitter', label: 'Twitter / X', color: '#000000' },
+  { value: 'facebook', label: 'Facebook', color: '#1877F2' },
+  { value: 'youtube_shorts', label: 'YouTube Shorts', color: '#FF0000' },
+  { value: 'general', label: 'General Marketing', color: '#6366f1' },
 ];
 
 export const CONTENT_TYPES = [
@@ -41,31 +44,31 @@ export const LANGUAGES = [
 ];
 
 export const GOALS = [
-  { value: 'engagement', label: '💬 Engagement & Interaction' },
-  { value: 'brand_awareness', label: '📣 Brand Awareness' },
-  { value: 'community_building', label: '🤝 Community Building' },
-  { value: 'education', label: '🎓 Education & Tips' },
-  { value: 'inspiration', label: '✨ Inspiration & Motivation' },
-  { value: 'entertainment', label: '😄 Entertainment & Fun' },
-  { value: 'storytelling', label: '📖 Storytelling & Personal' },
-  { value: 'product_launch', label: '🚀 Product / Feature Launch' },
-  { value: 'lead_generation', label: '📥 Lead Generation' },
-  { value: 'sales_conversion', label: '💰 Sales & Promotion' },
-  { value: 'event_promotion', label: '📅 Event Promotion' },
-  { value: 'user_generated', label: '📸 UGC & Social Proof' },
+  { value: 'engagement', label: 'Engagement & Interaction' },
+  { value: 'brand_awareness', label: 'Brand Awareness' },
+  { value: 'community_building', label: 'Community Building' },
+  { value: 'education', label: 'Education & Tips' },
+  { value: 'inspiration', label: 'Inspiration & Motivation' },
+  { value: 'entertainment', label: 'Entertainment & Fun' },
+  { value: 'storytelling', label: 'Storytelling & Personal' },
+  { value: 'product_launch', label: 'Product / Feature Launch' },
+  { value: 'lead_generation', label: 'Lead Generation' },
+  { value: 'sales_conversion', label: 'Sales & Promotion' },
+  { value: 'event_promotion', label: 'Event Promotion' },
+  { value: 'user_generated', label: 'UGC & Social Proof' },
 ];
 
 export const IMAGE_PURPOSES = [
-  { value: 'social_post', label: '📱 Social Media Post' },
-  { value: 'story', label: '⚡ Story / Reel Cover' },
-  { value: 'product_showcase', label: '🛍️ Product Showcase' },
-  { value: 'infographic', label: '📊 Infographic / Info Visual' },
-  { value: 'quote_card', label: '💬 Quote Card' },
-  { value: 'event_flyer', label: '📅 Event / Announcement' },
-  { value: 'blog_header', label: '📝 Blog / Article Header' },
-  { value: 'ad_creative', label: '🎯 Ad Creative' },
-  { value: 'mood_board', label: '🎨 Mood & Inspiration' },
-  { value: 'behind_scenes', label: '🎬 Behind the Scenes' },
+  { value: 'social_post', label: 'Social Media Post' },
+  { value: 'story', label: 'Story / Reel Cover' },
+  { value: 'product_showcase', label: 'Product Showcase' },
+  { value: 'infographic', label: 'Infographic / Info Visual' },
+  { value: 'quote_card', label: 'Quote Card' },
+  { value: 'event_flyer', label: 'Event / Announcement' },
+  { value: 'blog_header', label: 'Blog / Article Header' },
+  { value: 'ad_creative', label: 'Ad Creative' },
+  { value: 'mood_board', label: 'Mood & Inspiration' },
+  { value: 'behind_scenes', label: 'Behind the Scenes' },
 ];
 
 export const CONTENT_STATUS_COLORS = {

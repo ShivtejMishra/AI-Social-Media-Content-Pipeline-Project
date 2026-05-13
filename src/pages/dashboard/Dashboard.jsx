@@ -9,7 +9,7 @@ import Badge from '../../components/ui/Badge';
 import Button from '../../components/ui/Button';
 import ProductTour from '../../components/onboarding/ProductTour';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { PLATFORMS } from '../../constants/platforms';
+import { PLATFORMS, PlatformIcon } from '../../constants/platforms';
 
 const PLATFORM_COLORS = {
   instagram: '#E1306C', linkedin: '#0A66C2', twitter: '#1DA1F2',
@@ -171,8 +171,8 @@ const Dashboard = () => {
                 onClick={() => navigate(`/app/content/${item._id}`)}
                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 cursor-pointer transition-colors group"
               >
-                <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-sm flex-shrink-0">
-                  {PLATFORMS.find(p => p.value === item.platform)?.icon || '📄'}
+                <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <PlatformIcon platform={item.platform} size={18} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-slate-900 dark:text-white truncate group-hover:text-indigo-300 transition-colors">

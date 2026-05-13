@@ -11,7 +11,7 @@ import { aiApi } from '../../services/aiApi';
 import { exportApi } from '../../services/exportApi';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
-import { PLATFORMS, CONTENT_TYPES } from '../../constants/platforms';
+import { PLATFORMS, CONTENT_TYPES, PlatformIcon } from '../../constants/platforms';
 import { workspaceApi } from '../../services/workspaceApi';
 import { confirmAction } from '../../utils/confirmAction';
 
@@ -78,14 +78,13 @@ const ContentCard = ({ content, onDelete, onDuplicate, onApprove, onExport }) =>
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const platformEmoji = PLATFORMS.find(p => p.value === content.platform)?.icon || '📄';
   const outputText = content.output?.primaryContent || content.output?.caption || content.output?.instagramCaption || content.output?.linkedinPost || '';
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 hover:border-slate-200 dark:border-slate-700 transition-all group">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <span className="text-lg flex-shrink-0">{platformEmoji}</span>
+          <span className="flex-shrink-0"><PlatformIcon platform={content.platform} size={20} /></span>
           <div className="min-w-0">
             <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">{content.title}</h4>
             <p className="text-xs text-slate-500">{content.workspaceId?.brandName || 'Unknown'}</p>
@@ -271,7 +270,7 @@ const ContentLibrary = () => {
               className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-sm px-3 py-2.5"
             >
               <option value="">All Platforms</option>
-              {PLATFORMS.map(p => <option key={p.value} value={p.value}>{p.icon} {p.label}</option>)}
+              {PLATFORMS.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
             </select>
             <select
               value={filters.status}

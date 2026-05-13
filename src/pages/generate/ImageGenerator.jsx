@@ -341,7 +341,7 @@ const ImageGenerator = () => {
               options={(workspaces || []).map(w => ({ value: w._id, label: w.brandName }))} placeholder="Select workspace..." />
 
             <Select label="Platform" value={formData.platform} onChange={(e) => handleChange('platform', e.target.value)}
-              options={PLATFORMS.map(p => ({ value: p.value, label: `${p.icon} ${p.label}` }))} />
+              options={PLATFORMS.map(p => ({ value: p.value, label: p.label }))} />
 
             <Select label="Image Purpose" value={formData.purpose} onChange={(e) => handleChange('purpose', e.target.value)}
               options={IMAGE_PURPOSES} />

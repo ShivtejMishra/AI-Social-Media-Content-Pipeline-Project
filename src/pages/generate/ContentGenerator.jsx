@@ -8,7 +8,7 @@ import { useWorkspaceStore } from '../../store/workspaceStore';
 import { useContentStore } from '../../store/contentStore';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
-import { PLATFORMS, TONES, GOALS } from '../../constants/platforms';
+import { PLATFORMS, TONES, GOALS, PlatformIcon } from '../../constants/platforms';
 import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || '';
@@ -131,7 +131,7 @@ const PlatformPill = ({ p, active, onClick }) => (
         : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-indigo-400/50 hover:text-indigo-600 dark:hover:text-indigo-400'
     }`}
   >
-    <span>{p.icon}</span>
+    <PlatformIcon platform={p.value} size={16} />
     <span className="hidden sm:inline">{p.label.split('/')[0].trim()}</span>
   </button>
 );
