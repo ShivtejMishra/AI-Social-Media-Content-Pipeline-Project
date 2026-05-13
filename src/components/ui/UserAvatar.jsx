@@ -13,8 +13,12 @@ const UserAvatar = ({ user, size = 'md', className = '' }) => {
     xl: 'w-20 h-20 text-2xl',
   };
 
+  // Avatar is now a base64 data URI stored in MongoDB (starts with "data:")
+  // or a legacy path — handle both cases
   const avatarUrl = user?.avatar
-    ? user.avatar.startsWith('http') ? user.avatar : `${BASE_URL}${user.avatar}`
+    ? user.avatar.startsWith('data:') || user.avatar.startsWith('http')
+      ? user.avatar
+      : `${BASE_URL}${user.avatar}`
     : null;
 
   return (
