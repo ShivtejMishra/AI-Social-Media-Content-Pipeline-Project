@@ -1,10 +1,10 @@
-/**
- * UserAvatar — shows user photo if available, otherwise their initials.
- * Reads from the global authStore so it auto-updates everywhere when avatar changes.
- */
+import { useState } from 'react';
+
 const BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || '';
 
 const UserAvatar = ({ user, size = 'md', className = '' }) => {
+  const [imgError, setImgError] = useState(false);
+
   const sizeMap = {
     xs: 'w-6 h-6 text-[10px]',
     sm: 'w-8 h-8 text-xs',
@@ -13,9 +13,8 @@ const UserAvatar = ({ user, size = 'md', className = '' }) => {
     xl: 'w-20 h-20 text-2xl',
   };
 
-  // Avatar is now a base64 data URI stored in MongoDB (starts with "data:")
-  // or a legacy path — handle both cases
-  const avatarUrl = user?.avatar
+  // Handle base64 data URIs, full http URLs, and legacy /uploads/ paths
+  const avatarUrl = user?.avatar && !imgError
     ? user.avatar.startsWith('data:') || user.avatar.startsWith('http')
       ? user.avatar
       : `${BASE_URL}${user.avatar}`
@@ -26,7 +25,12 @@ const UserAvatar = ({ user, size = 'md', className = '' }) => {
       className={`rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-indigo-500/20 ${sizeMap[size]} ${className}`}
     >
       {avatarUrl ? (
-        <img src={avatarUrl} alt={user?.name || 'User'} className="w-full h-full object-cover" />
+        <img
+          src={avatarUrl}
+          alt={user?.name || 'User'}
+          className="w-full h-full object-cover"
+          onError={() => setImgError(true)}
+        />
       ) : (
         <span className="font-bold text-white select-none">
           {user?.name?.[0]?.toUpperCase() || 'U'}
