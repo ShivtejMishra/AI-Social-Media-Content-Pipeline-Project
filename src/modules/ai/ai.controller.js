@@ -163,18 +163,22 @@ const generateThumbnail = asyncHandler(async (req, res) => {
     const images = await generateGeminiImage(imagePrompt, { aspectRatio: '16:9' });
     const { base64, mimeType } = images[0];
 
-    const filename = `thumb_${Date.now()}`;
-    const imageUrl = await saveImageLocally(base64, filename, mimeType);
+    // Store as base64 data URI in MongoDB — no disk needed
+    const imageData = `data:${mimeType};base64,${base64}`;
+    const imageUrl = `/api/ai/images/{{id}}/data`; // placeholder, updated below
 
     savedAsset = await ImageAsset.create({
       userId:      req.user._id,
       workspaceId,
       prompt:      imagePrompt,
-      imageUrl,
+      imageData,
       aspectRatio: '16:9',
       platform:    'youtube',
       status:      'completed',
-      model:       'nano-banana',
+    });
+    // Update imageUrl with real ID
+    await ImageAsset.findByIdAndUpdate(savedAsset._id, {
+      imageUrl: `/api/ai/images/${savedAsset._id}/data`,
     });
   } catch (err) {
     console.error('[Thumbnail] Generation failed:', err.message);
@@ -188,4 +192,26 @@ const generateThumbnail = asyncHandler(async (req, res) => {
   return sendCreated(res, { message: 'Thumbnail generated!', data: { image: savedAsset } });
 });
 
-module.exports = { generateContent, regenerateContent, generateImage, getImages, getImageById, deleteImage, streamContent, generateThumbnail };
+/**
+ * GET /api/ai/images/:id/data
+ * Serve the raw image bytes stored in MongoDB as a proper image response
+ */
+const serveImageData = asyncHandler(async (req, res) => {
+  const asset = await ImageAsset.findById(req.params.id).select('+imageData');
+  if (!asset) throw AppError.notFound('Image not found');
+  if (!asset.imageData) throw AppError.notFound('Image data not available');
+
+  // Parse the data URI: "data:image/jpeg;base64,/9j/4AAQ..."
+  const matches = asset.imageData.match(/^data:(.+);base64,(.+)$/);
+  if (!matches) throw AppError.badRequest('Invalid image data format');
+
+  const mimeType = matches[1];
+  const buffer = Buffer.from(matches[2], 'base64');
+
+  res.set('Content-Type', mimeType);
+  res.set('Cache-Control', 'public, max-age=86400'); // cache 24h
+  res.set('Content-Length', buffer.length);
+  return res.send(buffer);
+});
+
+module.exports = { generateContent, regenerateContent, generateImage, getImages, getImageById, deleteImage, streamContent, generateThumbnail, serveImageData };

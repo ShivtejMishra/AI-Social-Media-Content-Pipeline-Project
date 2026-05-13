@@ -30,6 +30,9 @@ const generateImageSchema = z.object({
   contentId: z.string().optional(),
 });
 
+// Public: serve image bytes from MongoDB (browser img tags can't send auth headers)
+router.get('/images/:id/data', aiController.serveImageData);
+
 // All AI routes require authentication
 router.use(protect);
 

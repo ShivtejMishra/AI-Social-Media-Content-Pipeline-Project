@@ -186,11 +186,13 @@ const generateImageContent = async (userId, requestData) => {
     });
 
     if (images && images.length > 0) {
-      const filename = `img_${imageAsset._id}_${Date.now()}`;
-      const imageUrl = await saveImageLocally(images[0].base64, filename, images[0].mimeType);
+      // Store image as base64 data URI directly in MongoDB — no filesystem needed
+      const imageData = saveImageLocally(images[0].base64, images[0].mimeType);
+      const imageUrl = `/api/ai/images/${imageAsset._id}/data`;
 
       await ImageAsset.findByIdAndUpdate(imageAsset._id, {
         imageUrl,
+        imageData,  // base64 data URI stored in MongoDB
         status: 'completed',
       });
     }

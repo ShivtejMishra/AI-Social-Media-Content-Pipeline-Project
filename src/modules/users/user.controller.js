@@ -41,7 +41,9 @@ const updateProfile = asyncHandler(async (req, res) => {
 const updateAvatar = asyncHandler(async (req, res) => {
   if (!req.file) throw AppError.badRequest('No image file provided');
 
-  const avatarUrl = `/uploads/avatars/${req.file.filename}`;
+  // Convert buffer to base64 data URI — stored directly in MongoDB
+  const base64 = req.file.buffer.toString('base64');
+  const avatarUrl = `data:${req.file.mimetype};base64,${base64}`;
 
   const user = await User.findByIdAndUpdate(
     req.user._id,
